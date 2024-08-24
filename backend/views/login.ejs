@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Center the forms */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('./pexels-simon-rizzi-1809644.jpg');
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .form-container {
+            border: 2px solid rgba(190, 190, 190, 0.731);
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            backdrop-filter: blur(20px);
+            background-color: transparent;
+        }
+
+        .form-container2 {
+            margin-top: 30px;
+            border: 2px solid rgba(190, 190, 190, 0.731);
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .input-box label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 12px;
+            color: #888;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-box input:focus+label,
+        .input-box input:valid+label {
+            top: 0;
+            font-size: 12px;
+            color: #333;
+            background-color: #fff;
+            padding: 0 4px;
+        }
+
+        .login-register {
+            text-align: center;
+        }
+
+        .login-register p {
+            margin: 10px 0;
+        }
+
+        .login-register a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .login-register a:hover {
+            text-decoration: underline;
+        }
+
+        .text {
+            color: rgba(240, 248, 255, 0.879);
+        }
+
+        .remember-forgot {
+            font-size: .9em;
+            color: #9ea8b3;
+            font-weight: 500;
+            margin: -15px 0 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .remember-forgot label input {
+            accent-color: #5985a9;
+            margin-right: 3px;
+        }
+
+        .remember-forgot a {
+            color: #749aa3;
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .login_btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .login_btn label {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login_btn input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 4px;
+            background-color: #6197ac;
+            color: #4d4d4d;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login_btn input[type="submit"]:hover {
+            background-color: #cdedf6;
+            color: #333;
+        }
+
+        .register_btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .register_btn label {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .register_btn input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 4px;
+            background-color: #6197ac;
+            color: #4d4d4d;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .register_btn input[type="submit"]:hover {
+            background-color: #cdedf6;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Form -->
+    <div id="loginForm" class="form-container">
+        <h1 class="text">Login</h1>
+        <form action="/api/login" method="post">
+            <div class="input-box">
+                <input type="text" name="name" required>
+                <label>Username</label>
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" required>
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
+            <div class="login_btn">
+                <label>
+                    <input type="submit" value="Login">
+                </label>
+            </div>
+            <div class="login-register">
+                <p class="text">Don't have an account?
+                    <br>
+                    <a href="#" onclick="showRegisterForm()">Make a new account</a>
+                </p>
+            </div>
+            <% if (typeof message !== 'undefined') { %>
+                <% if(message!=='Registration failed'&& message!=='Invalid username or password.'&&message!=='You are not a student' && message !=="Invalid email entered"){%>
+                <p style="color: rgb(5, 203, 22); margin-top: 10px; display:flex; text-align: center; justify-content: center;"><%= message %></p>
+                <%} else {%>
+                    <p style="color: rgb(203, 31, 5); margin-top: 10px; display:flex; text-align: center; justify-content: center;"><%= message %></p>
+            <% } %>
+            <% } %>
+        </form>
+    </div>
+
+    <!-- Signup Form -->
+    <div id="registerForm" class="form-container2" style="display: none;">
+        <h1 class="text">Sign Up</h1>
+        <form action="/register" method="post">
+            <div class="input-box">
+                <input type="text" name="name" required>
+                <label>Username</label>
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" required>
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
+            <div class="register_btn">
+                <label>
+                    <input type="submit" value="Register">
+                </label>
+            </div>
+            <div class="login-register">
+                <p class="text">Already have an account? <a href="#" onclick="showLoginForm()">Log in</a></p>
+            </div>
+            <% if (typeof message !== 'undefined') { %>
+                <p style="color: rgb(219, 34, 34); margin-top:10px; margin-left:45px;"><%= message %></p>
+            <% } %>
+        </form>
+    </div>
+
+    <script>
+        function showRegisterForm() {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "block";
+        }
+
+        function showLoginForm() {
+            document.getElementById("registerForm").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+        }
+    </script>
+</body>
+
+</html>

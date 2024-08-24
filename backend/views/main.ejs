@@ -1,0 +1,39 @@
+<!-- main.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISS Live tracking | Website</title>
+    <!-- <title>Portal | Welcome</title> -->
+    <link rel="stylesheet" href="/style_for_main.css">
+</head>
+<body>
+    <div id="intro">
+        <h2 id="studentPortal">ISS Live tracking!</h2>
+        <div class="btns">
+            <div>
+                <button id="loginStudent">Login</button>
+            </div>
+            <!-- <div>
+                <button id="loginAdmin">Login as Admin</button>
+            </div> -->
+        </div>
+    </div>
+
+    <script>
+        //you need to direct it to the route on clicking the button 
+        // Add event listeners to the login buttons
+        document.getElementById("loginStudent").addEventListener("click", function() { //the id of the buttons
+            // Redirect to the student login page
+            window.location.href = "/login";
+        });
+
+        // document.getElementById("loginAdmin").addEventListener("click", function() {
+        //     // Redirect to the admin login page
+        //     window.location.href = "/adminlogin"; 
+        // });
+    </script>
+</body>
+</html>

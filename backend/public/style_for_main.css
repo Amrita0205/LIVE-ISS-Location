@@ -1,0 +1,62 @@
+/* style_for_main.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    background: url('./pexels-simon-rizzi-1809644.jpg') no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+#intro {
+    text-align: center;
+    margin-top: 10vh; /* Adjust as needed for vertical centering */
+    margin-left: 12px;
+    
+}
+
+#studentPortal {
+    font-size: 2rem;
+    color:rgba(240, 244, 248, 0.785);
+}
+
+.btns {
+    margin-top: 20px;
+    margin-left: -8px;
+}
+
+.btns div {
+    margin-bottom: 20px; /* Space between buttons */
+}
+
+.btns button {
+    
+    height: 40px;
+    font-size: 14px;
+    width: 150px;
+    color:rgba(240, 248, 255, 0.856);
+    border-color: #5985a9;
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    border: 2px solid rgb(82, 127, 164);
+    margin-left: 19px;
+    margin-top: -5px;
+    cursor: pointer;
+    background-color: transparent;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btns button:hover {
+    /* background-color: #0056b3; Darker blue on hover */
+    background-color: #9ea8b3;
+    color:#201f1f;
+    border:none;
+    font-weight: bold;
+}

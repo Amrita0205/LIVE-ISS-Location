@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISS Location Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        /* body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0f0f5f;
+            margin:0;
+            padding: 0;
+        } */
+
+        /* .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #f2f7fc;
+            margin-top: 20px;
+        } */
+        /* .header-container {
+            
+            position: relative;
+            text-align: center; */
+        /* margin: 20px auto; */
+        /* background-color: #000000; */
+        /* width: 100%;
+            height: 100px;
+            margin-top:0px;
+        }
+
+        .header-container h1 {
+            color: #f2f7fc;
+            margin: 0;
+        } */
+
+        /* .header-container button {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+            font-size: 14px;
+            width: 150px;
+            color: rgba(240, 248, 255, 0.856);
+            border-color: #5985a9;
+            border-radius: 10px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgb(82, 127, 164);
+            cursor: pointer;
+            background-color: transparent;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-container button:hover {
+            background-color: #9ea8b3;
+            color: #201f1f;
+            border: none;
+            font-weight: bold;
+        }
+
+
+        #map {
+            height: 500px;
+            width: 90%;
+            border-radius: 10px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        } */
+
+        /* footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        } */
+
+        /* button {
+            height: 40px;
+            font-size: 14px;
+            width: 150px;
+            color: rgba(240, 248, 255, 0.856);
+            border-color: #5985a9;
+            border-radius: 10px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgb(82, 127, 164);
+            margin-left: 19px;
+            margin-top: -5px;
+            cursor: pointer;
+            background-color: transparent;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        } */
+
+        /* button:hover {
+            background-color: #9ea8b3;
+            color: #201f1f;
+            border: none;
+            font-weight: bold;
+        }
+
+        .details-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+        } */
+        html,
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #3b5428;
+            margin: 0;
+            padding: 0;
+            color: #f2f7fc;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            /* background-color: #0f0f5f; */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: #000000;
+            width: 100%;
+            height: 100px;
+            position: relative;
+            color: #f2f7fc;
+            padding: 0 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container h1 {
+            margin: 0;
+            font-size: 24px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-container button {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+            font-size: 14px;
+            width: 150px;
+            color: rgba(240, 248, 255, 0.856);
+            border-color: #5985a9;
+            border-radius: 10px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgb(82, 127, 164);
+            cursor: pointer;
+            background-color: transparent;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-container button:hover {
+            background-color: #9ea8b3;
+            color: #201f1f;
+            border: none;
+            font-weight: bold;
+        }
+
+        #map {
+            height: 500px;
+            width: 90%;
+            border-radius: 10px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: #fff;
+            /* position: fixed; */
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize the map and set its view to the initial ISS position
+            const map = L.map('map').setView([0, 0], 2);
+            let timeoutId; // Define timeoutId variable
+
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+            }).addTo(map);
+
+            // Create the marker and add it to the map
+            const marker = L.circleMarker([0, 0], {
+                radius: 8,
+                fillColor: 'red',
+                color: 'red',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 1,
+            }).addTo(map);
+
+            // Listen for ISS data from the server using Socket.IO
+            const socket = io();
+            socket.on('issData', function (data) {
+                marker.setLatLng([data.latitude, data.longitude]);
+
+                // Debounce map view update
+                if (timeoutId) clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    map.setView([data.latitude, data.longitude], map.getZoom());
+                }, 200);
+                const detailsContainer = document.getElementById('details');
+                detailsContainer.innerHTML = ''; // Clear previous details
+
+                // Create cards based on the data fetched
+                Object.entries(data).forEach(([key, value]) => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <h2>${key.charAt(0).toUpperCase() + key.slice(1)}</h2>
+                        <p>${value}</p>
+                    `;
+                    detailsContainer.appendChild(card);
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- <h1>Real-Time ISS Location Tracker</h1> -->
+    <div class="header-container">
+        <h1>Real-Time ISS Location Tracker</h1>
+        <button id="logout" onclick="window.location.href='/logout';">Log Out</button>
+    </div>
+    <div id="map"></div>
+
+    <div id="details" class="details-container">
+        <!-- Cards will be dynamically inserted here -->
+    </div>
+
+    <footer>
+        <p>Created by &copy;Amrita kadam</p>
+        
+    </footer>
+
+    <!-- <div id="log-out-btn"> -->
+    <!-- <button id="logout"><a href="/logout" class="log-out">Log Out</a></button> -->
+    <!-- <button id="logout" onclick="window.location.href='/logout';">Log Out</button>
+
+    </div> -->
+
+    <!-- <script>
+        document.getElementById('logout').addEventListener('click', function () {
+            window.location.href = '/'; // Use a valid route or URL
+        });
+    </script> -->
+</body>
+
+</html>

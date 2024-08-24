@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISS Location Tracker</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const eventSource = new EventSource('/iss-stream');
+            eventSource.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                document.getElementById('latitude').textContent = data.latitude;
+                document.getElementById('longitude').textContent = data.longitude;
+                document.getElementById('altitude').textContent = data.altitude;
+                document.getElementById('velocity').textContent = data.velocity;
+            };
+        });
+    </script>
+</head>
+<body>
+    <h1>Real-Time ISS Location Tracker</h1>
+    <p>Latitude: <span id="latitude"></span></p>
+    <p>Longitude: <span id="longitude"></span></p>
+    <p>Altitude: <span id="altitude"></span> km</p>
+    <p>Velocity: <span id="velocity"></span> km/h</p>
+</body>
+</html>
